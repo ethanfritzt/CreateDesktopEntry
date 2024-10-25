@@ -2,6 +2,8 @@
 
 This guide outlines the steps for installing a new AppImage or other executable on Fedora and creating a desktop entry. A script is also included to automate the process for AppImages.
 
+This is just my process, and what I have intially come up with my first time on linux/fedora. I'm sure there are better ways to do this or more preferred ways to do this and I encourage discussion and improvements.
+
 ## Creating a Desktop Entry on Fedora
 
 1. Download the Application
