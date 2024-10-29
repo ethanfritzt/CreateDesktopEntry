@@ -14,19 +14,19 @@ This is just my process, and what I have intially come up with my first time on 
      - Download the tarball containing the application files
 
 2. Move the Application to the Appropriate Path
-   - AppImages: Move to `/bin`
+   - AppImages: Move to `~/.local/bin`
    - Tarball folders: Extract to `/opt`
 
 3. Create and Configure the Desktop Entry File
    - Create a `.desktop` file (ChatGPT can help with syntax)
    - Edit the Exec path:
-     - For AppImages: `/bin/<package>`
+     - For AppImages: `~/.local/bin/<package>`
      - For extracted applications: `/opt/<package>/bin/<package>`
    - Set the icon path:
      - For AppImages: Extract assets to `/opt/<package>`, then use `/opt/<package>/<package>.png`
      - For other formats: Locate the icon in the application folder
    - Add `%U` at the end of the Exec path
-   - Make the `.desktop` file executable: `chmod u+x <package>.desktop`
+   - Make the `.desktop` file executable: `chmod u+x ~/.local/share/applications/<package>.desktop`
 
 4. Update the Desktop Database
    - Run: `update-desktop-database`

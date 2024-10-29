@@ -19,23 +19,29 @@ if [ -d "/opt/$file_name" ]; then
 fi
 mv "squashfs-root" "/opt/$file_name"
 
-# 6. mv appimage to appropriate folder
-mv "$file_path" "/bin/$file_name.AppImage"
+# 6. Create local bin directory if it doesn't exist
+mkdir -p "$HOME/.local/bin"
 
-# 7. Create desktop entry
-touch "/usr/share/applications/$file_name.desktop"
+# 7. mv appimage to appropriate folder
+mv "$file_path" "$HOME/.local/bin/$file_name.AppImage"
 
-# 8. Add desktop entry to desktop entry file
+# 8. Create local applications directory if it doesn't exist
+mkdir -p "$HOME/.local/share/applications"
+
+# 9. Create desktop entry
+touch "$HOME/.local/share/applications/$file_name.desktop"
+
+# 10. Add desktop entry to desktop entry file
 echo "[Desktop Entry]
 Name=$file_name
-Exec="/bin/$file_name.AppImage"
+Exec=\"$HOME/.local/bin/$file_name.AppImage\"
 Icon=$(find "/opt/$file_name" -name "*.png" -o -name "*.svg" -print -quit)
 Terminal=false
 Type=Application
-Categories=Utility;" >> "/usr/share/applications/$file_name.desktop"
+Categories=Utility;" >> "$HOME/.local/share/applications/$file_name.desktop"
 
-# 9. Make desktop entry executable
-chmod u+x "/usr/share/applications/$file_name.desktop"
+# 11. Make desktop entry executable
+chmod u+x "$HOME/.local/share/applications/$file_name.desktop"
 
-# 10. Update desktop database
-update-desktop-database /usr/share/applications
+# 12. Update desktop database
+update-desktop-database "$HOME/.local/share/applications"
